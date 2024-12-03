@@ -1,0 +1,51 @@
+name: Update Repos on Push to Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  execute_and_update:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the repository
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Setup Python
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.10
+
+    # Execute the Python script
+    - name: Execute Python script
+      run: python syntaxRegexGenerator.py
+
+    # Update the first repository
+    - name: Push updated file to Repo 1
+      run: |
+        git clone https://${{ secrets.GITHUB_TOKEN }}@github.com/Xenon-Lang-Org/vscode-syntax-highlighter.git
+        mv -f xenon.tmLanguage.json repo1/
+        cd repo1
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add xenon.tmLanguage.json
+        git commit -m "Update generated file"
+        git push origin main
+
+    # # Update the second repository
+    # - name: Push updated file to Repo 2
+    #   run: |
+    #     git clone https://${{ secrets.GITHUB_TOKEN }}@github.com/username/repo2.git
+    #     cd repo2
+    #     sed -i '/\/\/ -- XENON LANG -- \/\/.*/,$d' target_file.txt
+    #     echo -e "// -- XENON LANG -- //" >> target_file.txt
+    #     cat ../generated_file.txt >> target_file.txt
+    #     git config user.name "github-actions[bot]"
+    #     git config user.email "github-actions[bot]@users.noreply.github.com"
+    #     git add target_file.txt
+    #     git commit -m "Update target file"
+    #     git push origin main
