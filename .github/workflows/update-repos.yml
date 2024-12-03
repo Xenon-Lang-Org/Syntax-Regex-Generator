@@ -30,7 +30,7 @@ jobs:
         REPO_TOKEN: ${{ secrets.PUSH_TOKEN }}
       run: |
         git clone https://$REPO_TOKEN@github.com/Xenon-Lang-Org/vscode-syntax-highlighter.git
-        mv -f xenon.tmLanguage.json vscode-syntax-highlighter/syntaxes/xenon.tmLanguage.json
+        mv -f xenon.tmLanguage.json vscode-syntax-highlighter/syntaxes/
         cd vscode-syntax-highlighter
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
