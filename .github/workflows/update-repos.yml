@@ -26,8 +26,10 @@ jobs:
 
     # Update the first repository
     - name: Push updated file to Repo 1
+      env:
+        REPO_TOKEN: ${{ secrets.PUSH_TOKEN }}
       run: |
-        git clone https://${{ secrets.GITHUB_TOKEN }}@github.com/Xenon-Lang-Org/vscode-syntax-highlighter.git
+        git clone https://$REPO_TOKEN@github.com/Xenon-Lang-Org/vscode-syntax-highlighter.git
         mv -f xenon.tmLanguage.json vscode-syntax-highlighter/xenon.tmLanguage.json
         cd vscode-syntax-highlighter
         git config user.name "github-actions[bot]"
@@ -39,7 +41,7 @@ jobs:
     # # Update the second repository
     # - name: Push updated file to Repo 2
     #   run: |
-    #     git clone https://${{ secrets.GITHUB_TOKEN }}@github.com/username/repo2.git
+    #     git clone https://$REPO_TOKEN@github.com/username/repo2.git
     #     cd repo2
     #     sed -i '/\/\/ -- XENON LANG -- \/\/.*/,$d' target_file.txt
     #     echo -e "// -- XENON LANG -- //" >> target_file.txt
