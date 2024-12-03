@@ -44,6 +44,8 @@ jobs:
 
     # Update the second repository
     - name: Push updated file to docs
+      env:
+        REPO_TOKEN: ${{ secrets.PUSH_TOKEN }}
       run: |
         git clone https://$REPO_TOKEN@github.com/Xenon-Lang-Org/docs.git
         cd docs
