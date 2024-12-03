@@ -18,11 +18,11 @@ jobs:
     - name: Setup Python
       uses: actions/setup-python@v4
       with:
-        python-version: 3.10
+        python-version: 3.11
 
     # Execute the Python script
     - name: Execute Python script
-      run: python syntaxRegexGenerator.py
+      run: python3.11 syntaxRegexGenerator.py
 
     # Update the first repository
     - name: Push updated file to Repo 1
