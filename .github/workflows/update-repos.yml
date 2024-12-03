@@ -32,7 +32,7 @@ jobs:
         git clone https://$REPO_TOKEN@github.com/Xenon-Lang-Org/vscode-syntax-highlighter.git
         ls
         mkdir -p vscode-syntax-highlighter/syntaxes
-        mv -f xenon.tmLanguage.json vscode-syntax-highlighter/xenon.tmLanguage.json
+        mv -f xenon.tmLanguage.json vscode-syntax-highlighter/syntaxes/xenon.tmLanguage.json
         cd vscode-syntax-highlighter
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
