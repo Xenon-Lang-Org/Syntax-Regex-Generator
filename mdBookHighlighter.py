@@ -55,6 +55,6 @@ HIGHLIGHT_FILE = """
           };
         };
       
-        hljs.registerLanguage('GladosLang', hljsGrammar);
+        hljs.registerLanguage('Xenon', hljsGrammar);
       })();
 """
