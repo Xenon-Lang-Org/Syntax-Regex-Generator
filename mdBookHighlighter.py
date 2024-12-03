@@ -9,7 +9,7 @@ HIGHLIGHT_FILE = """
               literal: '%(LITERALS_LIST)s',
             },
             contains: [
-              hljs.COMMENT('%(LINE_COMMENT_BEGIN)s', '%(LINE_COMMENT_END)s'), // Single-line comments
+              hljs.COMMENT('%(LINE_COMMENT_BEGIN)s', '%(JS_LINE_COMMENT_END)s'), // Single-line comments
               hljs.COMMENT('%(BLOCK_COMMENT_BEGIN)s', '%(BLOCK_COMMENT_END)s'), // Multi-line comments
               {
                 className: 'none', // Match built-in types and modifiers
@@ -28,7 +28,7 @@ HIGHLIGHT_FILE = """
               },
               {
                 className: 'function', // Function declarations
-                Match: /%(FUNCTION_CALL)s/,
+                match: /%(FUNCTION_CALL)s/,
               },
               {
                 className: 'number', // Numbers

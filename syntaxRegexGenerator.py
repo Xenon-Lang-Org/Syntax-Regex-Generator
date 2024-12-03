@@ -4,6 +4,7 @@ literals = ["true", "false"]
 regex_dict = {
     "LINE_COMMENT_BEGIN" : "//",
     "LINE_COMMENT_END" : "\\n",
+    "JS_LINE_COMMENT_END" : "$",
     "BLOCK_COMMENT_BEGIN" : "/\\\\*",
     "BLOCK_COMMENT_END" : "\\\\*/",
     "STRING_LITERAL" : "\\\"",
