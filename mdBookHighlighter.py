@@ -12,10 +12,15 @@ HIGHLIGHT_FILE = """
               hljs.COMMENT('%(LINE_COMMENT_BEGIN)s', '%(LINE_COMMENT_END)s'), // Single-line comments
               hljs.COMMENT('%(BLOCK_COMMENT_BEGIN)s', '%(BLOCK_COMMENT_END)s'), // Multi-line comments
               {
-                className: 'type', // Match built-in types and modifiers
+                className: 'none', // Match built-in types and modifiers
                 begin: /%(TYPE_BEGIN)s/,
-                match: /%(TYPE_MATCH)s/,
                 end: /%(TYPE_END)s/,
+                contains: [
+                  {
+                    className: 'type', // Built-in types
+                    match: /%(TYPE_MATCH)s/,
+                  }
+                ],
               },
               {
                 className: 'keyword', // Keywords like 'let', 'fn', etc.
