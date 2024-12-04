@@ -17,6 +17,7 @@ regex_dict = {
     "ESCAPE_CHAR" : "\\\\\\\\.",
     "DECIMAL_NUMBER" : "\\\\b[0-9]+[.]?[0-9]*\\\\b",
     "KEYWORDS" : f"\\\\b({'|'.join(keywords)})\\\\b",
+    "RETURN_TYPE_BEGIN" : "->\\\\s*",
     "TYPE_BEGIN" : "(->\\\\s*)?",
     "TYPE_MATCH" : f":?\\\\s*(\\\\*?\\\\s*(mut\\\\s+)?)*\\\\b(i8|i16|i32|i64|u8|u16|u32|u64|f32|f64|bool|char|void|{custom_type_name})\\\\b",
     "TYPE_END" : ".*",
