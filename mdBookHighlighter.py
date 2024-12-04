@@ -12,15 +12,11 @@ HIGHLIGHT_FILE = """
               hljs.COMMENT('%(LINE_COMMENT_BEGIN)s', '%(JS_LINE_COMMENT_END)s'), // Single-line comments
               hljs.COMMENT('%(BLOCK_COMMENT_BEGIN)s', '%(BLOCK_COMMENT_END)s'), // Multi-line comments
               {
-                className: 'none', // Match built-in types and modifiers
+                className: 'type', // Match built-in types and modifiers
                 begin: /%(TYPE_BEGIN)s/,
-                end: /%(TYPE_END)s/,
-                contains: [
-                  {
-                    className: 'type', // Built-in types
-                    match: /%(TYPE_MATCH)s/,
-                  }
-                ],
+                end: /%(TYPE_MATCH)s/,
+                exludedBegin: true,
+                exludedEnd: false,
               },
               {
                 className: 'keyword', // Keywords like 'let', 'fn', etc.
@@ -28,6 +24,33 @@ HIGHLIGHT_FILE = """
               },
               {
                 className: 'function', // Function declarations
+                beginKeywords: '%(FUNCTION_KEYWORD)s',
+                end: /%(FUNCTION_DECL_END)s/,
+                excludeEnd: true,
+                contains: [
+                  {
+                    className: 'title.function',
+                    begin: /%(FUNCTION_NAME)s/,
+                  },
+                  {
+                    className: 'params',
+                    begin: /%(FUNCTION_ARGS_BEGIN)s/,
+                    end: /%(FUNCTION_ARGS_END)s/,
+                    contains: [
+                      {
+                        className: 'variable',
+                        begin: /%(VARIABLE)s/,
+                      },
+                      {
+                        className: 'type',
+                        match: /%(TYPE_MATCH)s/,
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                className: 'function.call', // Function calls
                 match: /%(FUNCTION_CALL)s/,
               },
               {

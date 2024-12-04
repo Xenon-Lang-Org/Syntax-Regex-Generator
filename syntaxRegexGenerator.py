@@ -1,6 +1,11 @@
 keywords = ["let", "fn", "while", "if", "elif", "else", "return", "type"]
 literals = ["true", "false"]
 
+function_keyword = "fn"
+
+var_name = "[a-zA-Z_][a-zA-Z0-9_]*"
+custom_type_name = "[A-Z][a-zA-Z0-9_]*"
+
 regex_dict = {
     "LINE_COMMENT_BEGIN" : "//",
     "LINE_COMMENT_END" : "\\n",
@@ -13,17 +18,26 @@ regex_dict = {
     "DECIMAL_NUMBER" : "\\\\b[0-9]+[.]?[0-9]*\\\\b",
     "KEYWORDS" : f"\\\\b({'|'.join(keywords)})\\\\b",
     "TYPE_BEGIN" : "(->\\\\s*)?",
-    "TYPE_MATCH" : ":?\\\\s*(\\\\*?\\\\s*(mut\\\\s+)?)*\\\\b(i8|i16|i32|i64|u8|u16|u32|u64|f32|f64|bool|char|void|[A-Z][a-zA-Z0-9_]*)\\\\b",
+    "TYPE_MATCH" : f":?\\\\s*(\\\\*?\\\\s*(mut\\\\s+)?)*\\\\b(i8|i16|i32|i64|u8|u16|u32|u64|f32|f64|bool|char|void|{custom_type_name})\\\\b",
     "TYPE_END" : ".*",
-    "FUNCTION_CALL" : "\\\\b([a-zA-Z_][a-zA-Z0-9_]*)\\\\s*\\\\(",
+    "FUNCTION_NAME": f"\\\\b{var_name}\\\\b",
+    "FUNCTION_CALL" : f"\\\\b({var_name})\\\\s*\\\\(",
+    "FUNCTION_DECL_BEGIN" : "\\bfn\\b",
+    "FUNCTION_DECL_END" : "\\{",
+    "FUNCTION_ARGS_BEGIN" : "\\(",
+    "FUNCTION_ARGS_END" : "\\)",
     "OPERATORS" : "@|&",
-    "VARIABLE" : "\\\\b[a-zA-Z_][a-zA-Z0-9_]*\\\\b",
+    "VARIABLE" : f"\\\\b{var_name}\\\\b",
     "LITERALS" : f"\\\\b({'|'.join(literals)})\\\\b"
 }
 
 list_dict = {
     "KEYWORDS_LIST" : ' '.join(keywords),
     "LITERALS_LIST" : ' '.join(literals)
+}
+
+kw_dict = {
+    "FUNCTION_KEYWORD" : function_keyword
 }
 
 
@@ -40,4 +54,4 @@ for key in regex_dict:
         regex_dict[key] = regex_dict[key].replace("\\\\", "\\")
 
 with open("xenonHighlighter.js", "w") as f:
-    f.write(HIGHLIGHT_FILE % {**regex_dict, **list_dict})
+    f.write(HIGHLIGHT_FILE % {**regex_dict, **list_dict, **kw_dict})
